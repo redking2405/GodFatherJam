@@ -13,14 +13,14 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Obstacle
+  - Missile
+  - Origins
+  - Shield
+  - Wall
+  - Shoot
+  - Trou
   - 
   - 
   - 
