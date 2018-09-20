@@ -15,7 +15,7 @@ public class CongratScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        UpdateScore(PlayerPrefs.GetInt("score"));
 	}
 
     //fonction qui va update le score de l'écran de Win

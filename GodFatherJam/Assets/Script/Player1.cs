@@ -157,6 +157,20 @@ public class Player1 : MonoBehaviour {
 
     }
 
+    public void Arrived()
+    {
+        FadeScript.Instance.FadeOut = false;
+        Invoke("Win", timerMort);
+    }
+
+    private void Win()
+    {
+        //CongratScript.Instance.UpdateScore((int)Score.Instance.ZeScore);
+        PlayerPrefs.SetInt("score", (int)Score.Instance.ZeScore);
+        Debug.Log(PlayerPrefs.GetInt("score"));
+        SceneManager.LoadSceneAsync("Congratulation");
+    }
+
     private void Death()
     {
         SceneManager.LoadScene("GameOver");
