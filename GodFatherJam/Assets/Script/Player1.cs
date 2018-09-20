@@ -93,7 +93,8 @@ public class Player1 : MonoBehaviour {
                 P1Shield = false;
                 P1Attack = false;
                 P1Activate = false;
-              
+                P1Spam = false;
+                P2Spam = false;
                 P2Activate = false;
                 P2Shield = false;
                 P2Attack = false;
