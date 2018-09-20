@@ -9,6 +9,7 @@ public class Plat_Movement : MonoBehaviour {
     public float timeleft;
     public bool bouge = false;
     public bool touche = false;
+    private bool isArrived = false;
     private float PosX;
     public Transform Destination;
     // Use this for initialization
@@ -21,24 +22,44 @@ public class Plat_Movement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.Log(touche);
+        
         if(touche)
         {
-            if (Input.GetButtonDown("P1Spam"))
+
+            if (Input.GetButtonDown("P1Spam") && !Player1.Instance.OneJoueurActivate)
+            {
+                Player1.Instance.P1Spam = true;
+                Player1.Instance.OneJoueurActivate = true;
+
+            }
+
+            if (Input.GetButtonDown("P2Spam") && !Player1.Instance.OtherJoueurActivate)
+            {
+                Player1.Instance.P2Spam = true;
+                Player1.Instance.OtherJoueurActivate = true;
+            }
+            if (Player1.Instance.P1Spam&&Player1.Instance.P2Spam)
             {
 
                 rbd.velocity = Vector2.right * intensite;
                 bouge = true;
+                Player1.Instance.P1Spam = false;
+                Player1.Instance.P2Spam = false;
+                Player1.Instance.OneJoueurActivate = false;
+                Player1.Instance.OtherJoueurActivate = false;
 
             }
-            if (bouge == true)
+            if (bouge)
             {
                 timeleft -= Time.deltaTime;
             }
 
         }
-
-        restart();
+        if (!isArrived)
+        {
+            restart();
+        }
+        
 
         if (this.gameObject.transform.position.x < PosX)
         {
@@ -49,8 +70,11 @@ public class Plat_Movement : MonoBehaviour {
         if (this.gameObject.transform.position.x > Destination.position.x)
         {
             rbd.velocity = Vector2.zero;
-
+            touche = false;
             this.gameObject.transform.position = Destination.position;
+            Player1.Instance.isOnPlatform = false;
+            this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            isArrived = true;
         }
 	}
     private void OnTriggerEnter2D(Collider2D collision)
@@ -74,8 +98,8 @@ public class Plat_Movement : MonoBehaviour {
         rbd.velocity = Vector2.zero;
         bouge = false;
         timeleft = 1f;
-        rbd.velocity = Vector2.left * intensite;
-        Player1.Instance.Snap = null;
+       
+        
     }
 
 

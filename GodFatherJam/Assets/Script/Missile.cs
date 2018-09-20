@@ -12,11 +12,13 @@ public class Missile : MonoBehaviour {
     public int speed = 3;
     private Vector2 direction;
     Renderer rend;
-	// Use this for initialization
-	void Start () {
+    private Animator anim;
+    // Use this for initialization
+    void Start () {
         rbd = GetComponent<Rigidbody2D>();
         rend = GetComponent<Renderer>();
-	}
+        anim = GetComponent<Animator>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -58,8 +60,8 @@ public class Missile : MonoBehaviour {
     {
         if (collision.gameObject.layer == 8)
         {
-            Debug.Log("Bang t mort");
-
+            anim.SetBool("explosion", true);
+            
             Player1.Instance.Dead();
         }
     }

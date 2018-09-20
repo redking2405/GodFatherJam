@@ -18,15 +18,15 @@ public class projectile : MonoBehaviour {
         rdb.velocity = new Vector2(speed,0);
 	}
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 9)
+        if (collision.tag != "Player")
         {
-            Destroy(collision.gameObject);
             Destroy(gameObject);
-
+            if (collision.tag == "Obstacle")
+            {
+                Destroy(collision.gameObject);
+            }
         }
     }
-        
-    
 }

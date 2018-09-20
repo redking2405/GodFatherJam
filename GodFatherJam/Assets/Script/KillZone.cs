@@ -21,5 +21,10 @@ public class KillZone : MonoBehaviour {
         {
             Player1.Instance.Dead();
         }
+
+        if (collision.gameObject.layer == 10)
+        {
+            Destroy(collision.gameObject);
+        }
     }
 }
